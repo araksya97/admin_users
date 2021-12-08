@@ -3,13 +3,14 @@ import { connect } from "react-redux";
 import { editUser } from "../../store/actions"
 import "./AddUser.scss"
 import Header from '../header/Header';
+import { useHistory } from 'react-router';
 
 function EditUser(props) {
   const findUser = props.users.find(item => item.id === props.location.state.id)
   const [name, setName] = useState(findUser.name);
   const [email, setMail] = useState(findUser.email);
   const [location, setLocation] = useState(findUser.location);
-
+  const history = useHistory();
 
   const handleChangeName = (event) => {
     setName(event.target.value);
@@ -28,15 +29,19 @@ function EditUser(props) {
       name: name,
       email: email,
       location: location,
+      registeredDate: findUser.registeredDate,
+      lastActiveDate: findUser.lastActiveDate,
+      disabled: false
     };
     console.log(editedUser)
-    // props.editUser(editedUser);
-    // setName("")
-    // setMail("")
-    // setLocation("")
-    // setImage(null)
+    props.editUser(editedUser);
+    setName("")
+    setMail("")
+    setLocation("")
 
-    // props.history.push('/');
+    history.push({
+      pathname:  "/",
+   });
   };
   
   
@@ -78,6 +83,7 @@ function EditUser(props) {
         />
         <button
           onClick={handleClick}
+          type='button'
           // disabled={name.length === 0}
           className="form_btn"
         >Save</button>

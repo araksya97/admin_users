@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from "react-router";
 import { connect } from "react-redux";
 import { addUser } from "../../store/actions"
 import "./AddUser.scss"
@@ -8,7 +9,7 @@ function AddUser(props) {
   const [name, setName] = useState("");
   const [email, setMail] = useState("");
   const [location, setLocation] = useState("");
-
+  const history = useHistory();
 
   const handleChangeName = (event) => {
     setName(event.target.value);
@@ -20,6 +21,8 @@ function AddUser(props) {
   const handleChangeLocation = (event) => {
     setLocation(event.target.value)
   };
+
+
   // const handleChangeImage = async(event) => {
   //   event.preventDefault()
   //   const body = new FormData()
@@ -35,16 +38,24 @@ function AddUser(props) {
   //   console.log(res)
   // };
 
+
+
   const handleClick = () => {
     let user = {
       name: name,
       email: email,
       location: location,
+      registeredDate: new Date(),
+      lastActiveDate: new Date(),
+      disabled: false
     };
     props.addUser(user);
     setName("")
     setMail("")
     setLocation("")
+    history.push({
+      pathname:  "/",
+   });
   };
   return (
     <>

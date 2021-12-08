@@ -1,12 +1,9 @@
-
-
 .users_part {
   padding-left: 280px;
   padding-right: 50px;
-  
 }
-.adduser_part_users{
-padding-right: 50px;
+.adduser_part_users {
+  padding-right: 50px;
 }
 
 .single_user {
@@ -43,13 +40,18 @@ table {
       margin-left: 23px;
     }
   }
-  .mail{
-      color: #878787;
-      font-size: 20px;
+  .mail {
+    color: #878787;
+    font-size: 20px;
   }
-  .trash{
-      color: #F54745;
-      background-color: transparent;
-      border: none;
+  .trash {
+    color: #f54745;
+    background-color: transparent;
+    border: none;
+  }
+  .disabled {
+    width: 20px;
+    height: 10px;
+    margin-right: 20px;
   }
 }

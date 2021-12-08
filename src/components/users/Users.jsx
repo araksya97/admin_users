@@ -10,7 +10,8 @@ import { MdMail } from 'react-icons/md'
 import { FaSearch } from 'react-icons/fa'
 import { BsBellFill } from 'react-icons/bs'
 import { FiEdit } from 'react-icons/fi'
-
+import DisTrue from '../../assets/image/VectorT.png'
+import DisFalse from '../../assets/image/VectorF.png'
 
 function Users(props) {
 
@@ -18,9 +19,9 @@ function Users(props) {
     props.getUsers()
   }, []);
 
-  // function formatdate(date)  {
-  //     return `${date.slice(8, 10)}.${date.slice(5, 7)}.${date.slice(0, 4)}`
-  //   };
+  function formatdate(date) {
+    return `${date.slice(8, 10)}.${date.slice(5, 7)}.${date.slice(0, 4)}`
+  };
 
   return (
     <>
@@ -44,7 +45,6 @@ function Users(props) {
         <Link to='/adduser' className="adduserbtn">Add User</Link>
       </div>
       <div className="users_part">
-
         <table >
           <tr className="title_part">
             <th><input type="checkbox" name="" id="" /></th>
@@ -59,25 +59,28 @@ function Users(props) {
             <th>Actions</th>
           </tr>
           {props.users.map((data) =>
-            <tr className="single_user" kay={data.id} >
+            <tr className="single_user" key={data.id} >
               <th><input type="checkbox" name="" id="" /></th>
               <td className="pic"><img src={data.photo} alt="" /> </td>
               <td> {data.name}</td>
               <td> {data.location}</td>
-              <td> {data.registeredDate}</td>
-              <td> {data.lastActiveDate}</td>
+              <td> {formatdate(data.registeredDate)}</td>
+              <td> {formatdate(data.lastActiveDate)}</td>
               <td> <Link to={{ pathname: `mailto:${data.email}` }} target="_blank" className="mail"><MdMail /> </Link></td>
               <td>
-                <Link to={{
+                <Link className="mail" to={{
                   pathname: `/edituser/${data.id}`,
                   state: {
                     id: data.id,
                   }
+
                 }}><FiEdit /> </Link></td>
-              {/* <td> {data.disabled}</td> */}
-              <td> <button
-                onClick={() => { props.removeUser(data.id) }}
-                className="trash"><FaTrash /></button></td>
+              <td>
+                <span> <img className="disabled" src={data.disabled ? DisFalse : DisTrue} alt="" /></span >
+
+                <button
+                  onClick={() => { props.removeUser(data.id) }}
+                  className="trash"><FaTrash /></button></td>
             </tr>
           )}
         </table>
